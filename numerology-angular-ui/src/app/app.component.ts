@@ -7,17 +7,21 @@ import { HttpClient } from '@angular/common/http';
     <h2>Numerology Calculator</h2>
 
     <input [(ngModel)]="name" placeholder="Enter name" />
-    <input [(ngModel)]="dfl" placeholder="Dad initial" />
-    <input [(ngModel)]="mfl" placeholder="Mom initial" />
-    <button (click)="calculate()">Calculate</button>
+    <input [(ngModel)]="dadInitial" placeholder="Dad initial" />
+    <input [(ngModel)]="momInitial" placeholder="Mom initial" />
+
+    <div style="margin-top: 10px;">
+      <button (click)="calculate()">Calculate</button>
+      <button (click)="clear()" style="margin-left: 10px;">Clear</button>
+    </div>
 
     <p *ngIf="result !== null">Result: {{ result }}</p>
   `
 })
 export class AppComponent {
   name = '';
-  dfl = '';
-  mfl = '';
+  dadInitial = '';
+  momInitial = '';
   result: number | null = null;
 
   API = 'https://numerology-api-rz4d.onrender.com';
@@ -25,16 +29,22 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   calculate() {
-    this.http.post<any>(`${this.API}/numerology`, { name: this.name,dadInitial : this.dfl,momInitial : this.mfl})
-      .subscribe({
-        next: (res) => {
-          console.log('API response:', res);
-          this.result = res.number;
-        },
-        error: (err) => {
-          console.error('API error:', err);
-          alert('API call failed');
-        }
+    this.http.post<any>(`${this.API}/numerology`, {
+      name: this.name,
+      dadInitial: this.dadInitial,
+      momInitial: this.momInitial
+    }).subscribe(res => {
+      this.result = res.number;
+    });
+  }
+
+  clear() {
+    this.name = '';
+    this.dadInitial = '';
+    this.momInitial = '';
+    this.result = null;
+  }
+}        }
       });
   }
 }
