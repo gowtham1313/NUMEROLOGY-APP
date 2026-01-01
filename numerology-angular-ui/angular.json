@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "projects": {
+    "numerology-ui": {
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "options": {
+            "outputPath": "dist/numerology-ui",
+            "index": "src/index.html",
+            "main": "src/main.ts"
+          }
+        }
+      }
+    }
+  }
+}
