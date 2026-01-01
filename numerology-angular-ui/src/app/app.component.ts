@@ -16,7 +16,7 @@ export class AppComponent {
   name = '';
   result: number | null = null;
 
-  API = 'https://numerology-api.onrender.com';
+  API = 'https://numerology-api-rz4d.onrender.com';
 
   constructor(private http: HttpClient) {}
 
