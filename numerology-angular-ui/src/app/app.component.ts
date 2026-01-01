@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
     <input [(ngModel)]="name" placeholder="Enter name" />
     <button (click)="calculate()">Calculate</button>
 
-    <p *ngIf="result">Result: {{ result }}</p>
+    <p *ngIf="result !== null">Result: {{ result }}</p>
   `
 })
 export class AppComponent {
@@ -22,6 +22,15 @@ export class AppComponent {
 
   calculate() {
     this.http.post<any>(`${this.API}/numerology`, { name: this.name })
-      .subscribe(res => this.result = res.number);
+      .subscribe({
+        next: (res) => {
+          console.log('API response:', res);
+          this.result = res.number;
+        },
+        error: (err) => {
+          console.error('API error:', err);
+          alert('API call failed');
+        }
+      });
   }
 }
