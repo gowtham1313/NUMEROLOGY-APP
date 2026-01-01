@@ -27,4 +27,8 @@ app.post("/numerology/bulk", (req,res)=>{
   res.json(names.map(n=>({ name:n, number: calc(n) })));
 });
 
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Numerology API running on port ${PORT}`);
+  });
