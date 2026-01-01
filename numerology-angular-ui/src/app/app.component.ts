@@ -25,7 +25,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   calculate() {
-    this.http.post<any>(`${this.API}/numerology`, { name: this.name,dfl : this.dfl,mfl : this.mfl})
+    this.http.post<any>(`${this.API}/numerology`, { name: this.name,dadInitial : this.dfl,momInitial : this.mfl})
       .subscribe({
         next: (res) => {
           console.log('API response:', res);
