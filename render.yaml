@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: numerology-angular-ui
-    env: static
-    staticPublishPath: dist/numerology-ui
-    buildCommand: npm install && npm run build
