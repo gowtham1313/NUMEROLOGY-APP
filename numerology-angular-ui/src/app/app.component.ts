@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
     <h2>Numerology Calculator</h2>
 
     <input [(ngModel)]="name" placeholder="Enter name" />
+    <input [(ngModel)]="dfl" placeholder="Dad initial" />
+    <input [(ngModel)]="mfl" placeholder="Mom initial" />
     <button (click)="calculate()">Calculate</button>
 
     <p *ngIf="result !== null">Result: {{ result }}</p>
@@ -14,6 +16,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   name = '';
+  dfl = '';
+  mfl = '';
   result: number | null = null;
 
   API = 'https://numerology-api-rz4d.onrender.com';
@@ -21,7 +25,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   calculate() {
-    this.http.post<any>(`${this.API}/numerology`, { name: this.name })
+    this.http.post<any>(`${this.API}/numerology`, { name: this.name,dfl : this.dfl,mfl : this.mfl})
       .subscribe({
         next: (res) => {
           console.log('API response:', res);
