@@ -44,7 +44,4 @@ export class AppComponent {
     this.momInitial = '';
     this.result = null;
   }
-}        }
-      });
-  }
-}
+      }
