@@ -38,7 +38,7 @@ const calc = (name = '', dadInitial = '', momInitial = '') => {
   return sum;
 };
 
-app.post("/numerology", (req, res) => {
+/*app.post("/numerology", (req, res) => {
   const { name, dadInitial, momInitial } = req.body;
 
   res.json({
@@ -46,6 +46,37 @@ app.post("/numerology", (req, res) => {
     dadInitial,
     momInitial,
     number: calc(name, dadInitial, momInitial)
+  });
+});
+*/
+app.post("/numerology", (req, res) => {
+  const { name, dadInitial, momInitial, roundOffNumber } = req.body;
+
+  const calculatedNumber = calc(name, dadInitial, momInitial);
+
+  // ✅ If roundOffNumber is provided → return matched/not matched
+  if (
+    roundOffNumber !== undefined &&
+    roundOffNumber !== null &&
+    roundOffNumber !== ''
+  ) {
+    const isMatch = Number(roundOffNumber) === calculatedNumber;
+
+    return res.json({
+      name,
+      dadInitial,
+      momInitial,
+      roundOffNumber: Number(roundOffNumber),
+      matched: isMatch
+    });
+  }
+
+  // ✅ If roundOffNumber is NOT provided → return number (existing behavior)
+  return res.json({
+    name,
+    dadInitial,
+    momInitial,
+    number: calculatedNumber
   });
 });
 
