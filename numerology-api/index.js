@@ -34,7 +34,7 @@ const calc = (name = '', dadInitial = '', momInitial = '') => {
       .split('')
       .reduce((a, b) => a + Number(b), 0);
   }
-
+  console.log(sum);
   return sum;
 };
 
